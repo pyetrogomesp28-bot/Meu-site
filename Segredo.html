@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Soco Animado 👊</title>
 
+  <style>
+    body {
+      text-align: center;
+      margin-top: 100px;
+      font-family: Arial;
+      overflow: hidden;
+    }
+
+    #emoji {
+      font-size: 60px;
+      transition: transform 0.2s;
+    }
+
+    .soco {
+      animation: socar 0.3s;
+    }
+
+    @keyframes socar {
+      0% { transform: scale(1) translateY(0); }
+      50% { transform: scale(2) translateY(-20px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+  </style>
+
+</head>
+
+<body onclick="clicar()">
+
+<h1 id="emoji">👊😎😎🫵</h1>
+<p id="texto">Clique três vezes na tela</p>
+
+<script>
+let cliques = 0;
+
+function clicar() {
+  cliques++;
+  let emoji = document.getElementById("emoji");
+
+  // ativa animação
+  emoji.classList.add("soco");
+
+  setTimeout(() => {
+    emoji.classList.remove("soco");
+  }, 300);
+
+  if (cliques == 1) {
+    emoji.innerHTML = "👊💥";
+  } 
+  
+  else if (cliques == 2) {
+    emoji.innerHTML = "👊💥💥";
+  } 
+  
+  else if (cliques == 3) {
+    emoji.innerHTML = "👊💥💥💥";
+
+    setTimeout(function() {
+      document.body.innerHTML = `
+        <h2>Olá 👊😎</h2>
+        <p>Se você está vendo isso saiba que você sempre será meu meio irmão tmj 😎👊</p>
+      `;
+    }, 1000);
+  }
+}
+</script>
+
+</body>
+</html>
