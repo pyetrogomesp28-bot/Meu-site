@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quebra-Cabeça Secreto</title>
 
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: #111;
+  color: white;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+#puzzle {
+  width: 300px;
+  height: 300px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.piece {
+  width: 100px;
+  height: 100px;
+  background-size: 300px 300px;
+  border: 1px solid #000;
+  cursor: grab;
+}
+
+#final {
+  display: none;
+  font-size: 22px;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🧩 Monte o quebra-cabeça</h1>
+
+<div id="puzzle"></div>
+
+<div id="final">
+  <h2>🔓 ACESSO LIBERADO</h2>
+  <p>Olá,Se você e o primo que apareceu nesta imagem saiba que você é o melhor primo de todos tmj👊</p>
+</div>
+
+<script>
+// 🔴 IMPORTANTE: coloque o nome da sua imagem aqui
+let imagem = "foto.jpg";
+
+let puzzle = document.getElementById("puzzle");
+let ordem = [0,1,2,3,4,5,6,7,8];
+
+// embaralhar
+ordem.sort(() => Math.random() - 0.5);
+
+ordem.forEach((num, index) => {
+  let piece = document.createElement("div");
+  piece.className = "piece";
+  piece.draggable = true;
+  piece.dataset.correto = num;
+  piece.dataset.atual = index;
+
+  let x = (num % 3) * 100;
+  let y = Math.floor(num / 3) * 100;
+
+  piece.style.backgroundImage = `url(${imagem})`;
+  piece.style.backgroundPosition = `-${x}px -${y}px`;
+
+  puzzle.appendChild(piece);
+});
+
+// arrastar
+let arrastando = null;
+
+document.querySelectorAll(".piece").forEach(p => {
+  p.addEventListener("dragstart", () => {
+    arrastando = p;
+  });
+
+  p.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  p.addEventListener("drop", () => {
+    if (arrastando !== p) {
+      let temp = p.style.backgroundPosition;
+      p.style.backgroundPosition = arrastando.style.backgroundPosition;
+      arrastando.style.backgroundPosition = temp;
+
+      let temp2 = p.dataset.correto;
+      p.dataset.correto = arrastando.dataset.correto;
+      arrastando.dataset.correto = temp2;
+
+      verificar();
+    }
+  });
+});
+
+// verificar se completou
+function verificar() {
+  let peças = document.querySelectorAll(".piece");
+  let certo = true;
+
+  peças.forEach((p, i) => {
+    if (parseInt(p.dataset.correto) !== i) {
+      certo = false;
+    }
+  });
+
+  if (certo) {
+    document.getElementById("final").style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>
