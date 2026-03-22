@@ -17,8 +17,8 @@ h1 {
 }
 
 #puzzle {
-  width: 450px;
-  height: 450px;
+  width: 300px;
+  height: 300px;
   margin: 20px auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -26,9 +26,9 @@ h1 {
 }
 
 .piece {
-  width: 150px;
-  height: 150px;
-  background-size: 450px 450px;
+  width: 100px;
+  height: 100px;
+  background-size: 300px 300px;
   border: 1px solid #000;
   cursor: grab;
 }
@@ -43,18 +43,18 @@ h1 {
 
 <body>
 
-<h1>🧩 Monte o quebra-cabeça 3x3</h1>
+<h1>🧩 Monte o quebra-cabeça</h1>
 
 <div id="puzzle"></div>
 
 <div id="final">
   <h2>🔓 ACESSO LIBERADO</h2>
-  <p>Olá, Se você e o primo que apareceu nesta imagem saiba que você é o melhor primo de todos tmj👊</p>
+  <p>Olá,Se essa mensagem chegou em você saiba que você é a melhor madrinha do mundo te amo❤️</p>
 </div>
 
 <script>
 // 🔴 IMPORTANTE: coloque o nome da sua imagem aqui
-let imagem = "foto.jpg";
+let imagem = "IMG-20260318-WA0004.jpg";
 
 let puzzle = document.getElementById("puzzle");
 let ordem = [0,1,2,3,4,5,6,7,8];
@@ -69,8 +69,8 @@ ordem.forEach((num, index) => {
   piece.dataset.correto = num;
   piece.dataset.atual = index;
 
-  let x = (num % 3) * 150;
-  let y = Math.floor(num / 3) * 150;
+  let x = (num % 3) * 100;
+  let y = Math.floor(num / 3) * 100;
 
   piece.style.backgroundImage = `url(${imagem})`;
   piece.style.backgroundPosition = `-${x}px -${y}px`;
