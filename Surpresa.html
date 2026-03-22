@@ -21,13 +21,13 @@ h1 {
   height: 300px;
   margin: 20px auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2px;
 }
 
 .piece {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-size: 300px 300px;
   border: 1px solid #000;
   cursor: grab;
@@ -49,7 +49,7 @@ h1 {
 
 <div id="final">
   <h2>🔓 ACESSO LIBERADO</h2>
-  <p>Olá,Se você e o primo que apareceu nesta imagem saiba que você é o melhor primo de todos tmj👊</p>
+  <p>Olá, Se você e o primo que apareceu nesta imagem saiba que você é o melhor primo de todos tmj👊</p>
 </div>
 
 <script>
@@ -57,7 +57,7 @@ h1 {
 let imagem = "foto.jpg";
 
 let puzzle = document.getElementById("puzzle");
-let ordem = [0,1,2,3,4,5,6,7,8];
+let ordem = [0,1,2,3,4,5];
 
 // embaralhar
 ordem.sort(() => Math.random() - 0.5);
@@ -69,8 +69,8 @@ ordem.forEach((num, index) => {
   piece.dataset.correto = num;
   piece.dataset.atual = index;
 
-  let x = (num % 3) * 100;
-  let y = Math.floor(num / 3) * 100;
+  let x = (num % 2) * 150;
+  let y = Math.floor(num / 2) * 150;
 
   piece.style.backgroundImage = `url(${imagem})`;
   piece.style.backgroundPosition = `-${x}px -${y}px`;
