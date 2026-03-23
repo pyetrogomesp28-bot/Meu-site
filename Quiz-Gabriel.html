@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Misterioso</title>
+</head>
+
+<body style="text-align:center; font-family:Arial; margin-top:100px;">
+
+  <h1 id="titulo">❓</h1>
+  <p id="texto">Clique na tela para começar</p>
+
+  <div id="quiz" style="display:none;">
+    <p id="pergunta"></p>
+    <input id="resposta" placeholder="Digite sua resposta">
+    <br><br>
+    <button onclick="verificar()">Responder</button>
+  </div>
+
+  <div id="final" style="display:none;">
+    <img src="IMG-20260318-WA0004.jpg" width="250">
+    <h2>🎉 PARABÉNS VOCÊ PASSOU DO QUIZ!</h2>
+  </div>
+
+  <script>
+    let etapa = 0;
+
+    const perguntas = [
+      "O que Gabriel faz quando está triste/desgosto?",
+      "O que Gabriel faz quando está com raiva?",
+      "O que Gabriel faz quando está com medo?"
+    ];
+
+    function começar() {
+      document.getElementById("titulo").innerHTML = "🧠 Quiz";
+      document.getElementById("texto").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+      mostrarPergunta();
+      document.body.onclick = null;
+    }
+
+    document.body.onclick = começar;
+
+    function mostrarPergunta() {
+      document.getElementById("pergunta").innerHTML = perguntas[etapa];
+      document.getElementById("resposta").value = "";
+    }
+
+    function verificar() {
+      let r = document.getElementById("resposta").value.toLowerCase();
+
+      if (etapa === 0 && r !== "bico") {
+        alert("❌ Errou! Não passou.");
+        location.reload();
+      }
+
+      if (etapa === 1 && r !== "grita") {
+        alert("❌ Errou! Não passou.");
+        location.reload();
+      }
+
+      if (etapa === 2 && r !== "chora" && r !== "grita") {
+        alert("❌ Errou! Não passou.");
+        location.reload();
+      }
+
+      etapa++;
+
+      if (etapa < perguntas.length) {
+        mostrarPergunta();
+      } else {
+        document.getElementById("quiz").style.display = "none";
+        document.getElementById("final").style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
