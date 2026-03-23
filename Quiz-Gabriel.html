@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
   <title>Quiz Misterioso</title>
 </head>
 
 <body style="text-align:center; font-family:Arial; margin-top:100px;">
 
-  <h1 id="titulo">❓</h1>
+  <h1 id="titulo" style="font-size:80px;">?</h1>
   <p id="texto">Clique na tela para começar</p>
 
   <div id="quiz" style="display:none;">
     <p id="pergunta"></p>
+
     <input id="resposta" placeholder="Digite sua resposta">
     <br><br>
+
     <button onclick="verificar()">Responder</button>
   </div>
 
@@ -31,10 +34,11 @@
     ];
 
     function começar() {
-      document.getElementById("titulo").innerHTML = "🧠 Quiz";
+      document.getElementById("titulo").innerHTML = "QUIZ";
       document.getElementById("texto").style.display = "none";
       document.getElementById("quiz").style.display = "block";
       mostrarPergunta();
+
       document.body.onclick = null;
     }
 
@@ -46,20 +50,25 @@
     }
 
     function verificar() {
-      let r = document.getElementById("resposta").value.toLowerCase();
+      let r = document.getElementById("resposta").value
+        .toLowerCase()
+        .trim();
 
+      // Pergunta 1
       if (etapa === 0 && r !== "bico") {
-        alert("❌ Errou! Não passou.");
+        alert("❌ Errou! Tente novamente.");
         location.reload();
       }
 
+      // Pergunta 2
       if (etapa === 1 && r !== "grita") {
-        alert("❌ Errou! Não passou.");
+        alert("❌ Errou! Tente novamente.");
         location.reload();
       }
 
+      // Pergunta 3
       if (etapa === 2 && r !== "chora" && r !== "grita") {
-        alert("❌ Errou! Não passou.");
+        alert("❌ Errou! Tente novamente.");
         location.reload();
       }
 
