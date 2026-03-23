@@ -7,9 +7,14 @@
 
 <body style="text-align:center; font-family:Arial; margin-top:100px;">
 
-  <h1 id="titulo" style="font-size:80px;">?</h1>
-  <p id="texto">Clique na tela para começar</p>
+  <!-- TELA INICIAL -->
+  <div id="inicio">
+    <h1 style="font-size:80px;">?</h1>
+    <p>Clique no botão para começar</p>
+    <button onclick="comecar()">COMEÇAR</button>
+  </div>
 
+  <!-- QUIZ -->
   <div id="quiz" style="display:none;">
     <p id="pergunta"></p>
 
@@ -19,6 +24,7 @@
     <button onclick="verificar()">Responder</button>
   </div>
 
+  <!-- FINAL -->
   <div id="final" style="display:none;">
     <img src="IMG-20260318-WA0004.jpg" width="250">
     <h2>🎉 PARABÉNS VOCÊ PASSOU DO QUIZ!</h2>
@@ -33,16 +39,11 @@
       "O que Gabriel faz quando está com medo?"
     ];
 
-    function começar() {
-      document.getElementById("titulo").innerHTML = "QUIZ";
-      document.getElementById("texto").style.display = "none";
+    function comecar() {
+      document.getElementById("inicio").style.display = "none";
       document.getElementById("quiz").style.display = "block";
       mostrarPergunta();
-
-      document.body.onclick = null;
     }
-
-    document.body.onclick = começar;
 
     function mostrarPergunta() {
       document.getElementById("pergunta").innerHTML = perguntas[etapa];
@@ -54,21 +55,18 @@
         .toLowerCase()
         .trim();
 
-      // Pergunta 1
       if (etapa === 0 && r !== "bico") {
-        alert("❌ Errou! Tente novamente.");
+        alert("❌ Errou!");
         location.reload();
       }
 
-      // Pergunta 2
       if (etapa === 1 && r !== "grita") {
-        alert("❌ Errou! Tente novamente.");
+        alert("❌ Errou!");
         location.reload();
       }
 
-      // Pergunta 3
       if (etapa === 2 && r !== "chora" && r !== "grita") {
-        alert("❌ Errou! Tente novamente.");
+        alert("❌ Errou!");
         location.reload();
       }
 
