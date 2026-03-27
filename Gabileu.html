@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>segredo</title>
+
+<style>
+  body {
+    text-align: center;
+    margin-top: 100px;
+    font-family: Arial;
+    background-color: black;
+    color: white;
+  }
+
+  img {
+    width: 250px;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+
+  #senhaBox {
+    display: none;
+    margin-top: 20px;
+  }
+
+  input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+  }
+
+  button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+
+</head>
+<body>
+
+<h2>Clique na imagem 👇</h2>
+
+<img src="IMG-20260318-WA0004.jpg" onclick="mostrarSenha()">
+
+<div id="senhaBox">
+  <p>Digite a senha:</p>
+  <input type="password" id="senhaInput">
+  <br>
+  <button onclick="verificar()">Entrar</button>
+</div>
+
+<script>
+function mostrarSenha() {
+  document.getElementById("senhaBox").style.display = "block";
+}
+
+function verificar() {
+  var senha = document.getElementById("senhaInput").value;
+
+  if (senha === "1234gabileu") {
+    alert("BABILEI MEU GALEGO FAVORITO BWI BWI BWI BEIJO TE AMO");
+  } else {
+    alert("Senha errada!");
+  }
+}
+</script>
+
+</body>
+</html>
