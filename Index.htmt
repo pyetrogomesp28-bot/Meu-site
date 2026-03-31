@@ -1,60 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Kifesta</title>
-
-<style>
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: #ffeef2;
-  margin: 0;
-}
-
-.logo {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin-top: 40px;
-  object-fit: cover;
-}
-
-button {
-  padding: 12px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #ff3d6d;
-  color: white;
-  font-size: 16px;
-}
-
-#loja {
-  display: none;
-  margin-top: 20px;
-}
-</style>
-
 </head>
 
-<body>
-
-<img src="Screenshot_20260331_140256_Instagram.jpg" class="logo">
+<body style="text-align:center; font-family:Arial; background:#ffeef2;">
 
 <h1>Kifesta</h1>
 
-<button onclick="abrirLoja()">Entrar</button>
+<button onclick="document.getElementById('loja').style.display='block'">
+Entrar
+</button>
 
-<div id="loja">
+<div id="loja" style="display:none; margin-top:20px;">
 
 <h2>🍿 Pipoca Gourmet</h2>
 
-<button onclick="escolher('Ninho')">Ninho</button>
-<button onclick="escolher('Chocolate')">Chocolate</button>
-<button onclick="escolher('Nesquik')">Nesquik</button>
-<button onclick="escolher('Morango')">Morango</button>
-<button onclick="escolher('Brigadeiro Colorido')">Brigadeiro Colorido</button>
+<button onclick="mostrar('Ninho')">Ninho</button>
+<button onclick="mostrar('Chocolate')">Chocolate</button>
+<button onclick="mostrar('Nesquik')">Nesquik</button>
+<button onclick="mostrar('Morango')">Morango</button>
+<button onclick="mostrar('Brigadeiro Colorido')">Brigadeiro Colorido</button>
 
 <h3 id="resposta"></h3>
 
@@ -63,19 +30,15 @@ button {
 <h2>🍬 Brigadeiros</h2>
 <p>Brigadeiro, Beijinho, Bem Casado, Ninho, Coco, Cajuzinho, Crocante, Surpresa de Uva</p>
 
-<p>💰 Personalizado: R$ 1,80 cada</p>
-<p>💰 Sem letra: R$ 1,80 cada</p>
+<p>💰 Personalizado: R$ 1,80</p>
+<p>💰 Sem letra: R$ 1,80</p>
 
 </div>
 
 <script>
-function abrirLoja(){
-  document.getElementById("loja").style.display = "block";
-}
-
-function escolher(sabor){
-  document.getElementById("resposta").innerHTML =
-  "Você escolheu: " + sabor + "<br>Preço: a partir de R$ 3,80 por saquinho";
+function mostrar(sabor){
+document.getElementById("resposta").innerHTML =
+"Você escolheu: " + sabor + "<br>Preço: R$ 3,80";
 }
 </script>
 
