@@ -6,79 +6,76 @@
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   text-align: center;
-  background: #fff5f7;
+  background: #ffeef2;
+  margin: 0;
 }
 
-/* Logo redondo */
 .logo {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  margin-top: 30px;
+  margin-top: 40px;
+  object-fit: cover;
 }
 
-/* Botões */
 button {
-  padding: 10px 20px;
+  padding: 12px 20px;
   margin: 10px;
   border: none;
-  border-radius: 10px;
-  background: #ff4d6d;
+  border-radius: 8px;
+  background: #ff3d6d;
   color: white;
-  cursor: pointer;
+  font-size: 16px;
 }
 
-.produtos {
+#loja {
   display: none;
   margin-top: 20px;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- LOGO -->
-<img src="logo.png" class="logo">
+<img src="Screenshot_20260331_140256_Instagram.jpg" class="logo">
 
 <h1>Kifesta</h1>
 
-<button onclick="entrar()">Entrar</button>
+<button onclick="abrirLoja()">Entrar</button>
 
-<div class="produtos" id="produtos">
+<div id="loja">
 
 <h2>🍿 Pipoca Gourmet</h2>
-<p>Sabores:</p>
 
-<button onclick="mostrarPreco('Ninho')">Ninho</button>
-<button onclick="mostrarPreco('Chocolate')">Chocolate</button>
-<button onclick="mostrarPreco('Nesquik')">Nesquik</button>
-<button onclick="mostrarPreco('Morango')">Morango</button>
-<button onclick="mostrarPreco('Brigadeiro Colorido')">Brigadeiro Colorido</button>
+<button onclick="escolher('Ninho')">Ninho</button>
+<button onclick="escolher('Chocolate')">Chocolate</button>
+<button onclick="escolher('Nesquik')">Nesquik</button>
+<button onclick="escolher('Morango')">Morango</button>
+<button onclick="escolher('Brigadeiro Colorido')">Brigadeiro Colorido</button>
+
+<h3 id="resposta"></h3>
+
+<hr>
 
 <h2>🍬 Brigadeiros</h2>
-<p>
-Brigadeiro, Beijinho, Bem Casado, Ninho, Coco, Cajuzinho, Crocante, Surpresa de Uva
-</p>
+<p>Brigadeiro, Beijinho, Bem Casado, Ninho, Coco, Cajuzinho, Crocante, Surpresa de Uva</p>
 
-<h3>💰 Preços</h3>
-<p>• Pipoca: a partir de R$ 3,80 por saquinho</p>
-<p>• Brigadeiro personalizado: R$ 1,80 cada</p>
-<p>• Brigadeiro sem letra: R$ 1,80 cada</p>
-
-<p id="resultado"></p>
+<p>💰 Personalizado: R$ 1,80 cada</p>
+<p>💰 Sem letra: R$ 1,80 cada</p>
 
 </div>
 
 <script>
-function entrar(){
-  document.getElementById("produtos").style.display = "block";
+function abrirLoja(){
+  document.getElementById("loja").style.display = "block";
 }
 
-function mostrarPreco(sabor){
-  document.getElementById("resultado").innerText =
-  "Você escolheu " + sabor + " 🍿\nPreço: a partir de R$ 3,80";
+function escolher(sabor){
+  document.getElementById("resposta").innerHTML =
+  "Você escolheu: " + sabor + "<br>Preço: a partir de R$ 3,80 por saquinho";
 }
 </script>
 
