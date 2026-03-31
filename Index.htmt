@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Kifesta</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  background: #fff5f7;
+}
+
+/* Logo redondo */
+.logo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-top: 30px;
+}
+
+/* Botões */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+
+.produtos {
+  display: none;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGO -->
+<img src="logo.png" class="logo">
+
+<h1>Kifesta</h1>
+
+<button onclick="entrar()">Entrar</button>
+
+<div class="produtos" id="produtos">
+
+<h2>🍿 Pipoca Gourmet</h2>
+<p>Sabores:</p>
+
+<button onclick="mostrarPreco('Ninho')">Ninho</button>
+<button onclick="mostrarPreco('Chocolate')">Chocolate</button>
+<button onclick="mostrarPreco('Nesquik')">Nesquik</button>
+<button onclick="mostrarPreco('Morango')">Morango</button>
+<button onclick="mostrarPreco('Brigadeiro Colorido')">Brigadeiro Colorido</button>
+
+<h2>🍬 Brigadeiros</h2>
+<p>
+Brigadeiro, Beijinho, Bem Casado, Ninho, Coco, Cajuzinho, Crocante, Surpresa de Uva
+</p>
+
+<h3>💰 Preços</h3>
+<p>• Pipoca: a partir de R$ 3,80 por saquinho</p>
+<p>• Brigadeiro personalizado: R$ 1,80 cada</p>
+<p>• Brigadeiro sem letra: R$ 1,80 cada</p>
+
+<p id="resultado"></p>
+
+</div>
+
+<script>
+function entrar(){
+  document.getElementById("produtos").style.display = "block";
+}
+
+function mostrarPreco(sabor){
+  document.getElementById("resultado").innerText =
+  "Você escolheu " + sabor + " 🍿\nPreço: a partir de R$ 3,80";
+}
+</script>
+
+</body>
+</html>
