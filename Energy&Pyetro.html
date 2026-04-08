@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy&Pyetro</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f2f2f2; margin: 0; padding: 0; }
+header { background: #ff0000; color: white; padding: 20px; text-align: center; }
+#tutorials { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; justify-content: center; }
+.tutorial { background: white; border-radius: 8px; padding: 10px; width: 250px; box-shadow: 0 0 5px rgba(0,0,0,0.2); text-align: center; }
+.tutorial img { width: 100%; border-radius: 5px; }
+#addButton { position: fixed; bottom: 20px; right: 20px; padding: 15px 20px; background: #ff0000; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; display: none; }
+#adminAccess { margin-top: 10px; text-align: center; }
+#adminAccess input { padding: 5px; font-size: 14px; }
+#adminAccess button { padding: 5px 10px; font-size: 14px; cursor: pointer; }
+#addForm { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 1000; }
+#addForm input { display: block; margin-bottom: 10px; width: 100%; }
+#overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 900; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>Energy&Pyetro</h1>
+<div id="adminAccess">
+<label><strong>Adicionar:</strong></label>
+<input type="password" id="adminPasswordInput" placeholder="Senha de administrador">
+<button id="loginButton">Entrar</button>
+</div>
+</header>
+
+<div id="tutorials"></div>
+<button id="addButton">Adicionar Foto/Tutorial</button>
+<div id="overlay"></div>
+<div id="addForm">
+<h3>Adicionar Tutorial/Foto</h3>
+<input type="file" id="photoInput" accept="image/*">
+<input type="text" id="titleInput" placeholder="Digite o título">
+<button id="confirmAdd">Adicionar</button>
+<button id="cancelAdd">Cancelar</button>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "COLE_AQUI",
+  authDomain: "COLE_AQUI",
+  projectId: "COLE_AQUI",
+  storageBucket: "COLE_AQUI",
+  messagingSenderId: "COLE_AQUI",
+  appId: "COLE_AQUI"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+const adminPassword = "administrador125";
+const addButton = document.getElementById('addButton');
+const loginButton = document.getElementById('loginButton');
+const passwordInput = document.getElementById('adminPasswordInput');
+const adminAccessDiv = document.getElementById('adminAccess');
+const tutorialsDiv = document.getElementById('tutorials');
+const addForm = document.getElementById('addForm');
+const overlay = document.getElementById('overlay');
+const photoInput = document.getElementById('photoInput');
+const titleInput = document.getElementById('titleInput');
+const confirmAdd = document.getElementById('confirmAdd');
+const cancelAdd = document.getElementById('cancelAdd');
+
+// Login
+loginButton.addEventListener('click', () => {
+  if(passwordInput.value === adminPassword){
+    addButton.style.display = 'block';
+    adminAccessDiv.style.display = 'none';
+    alert("Acesso concedido!");
+  } else alert("Senha incorreta!");
+});
+
+// Abrir formulário
+addButton.addEventListener('click', () => {
+  addForm.style.display = 'block';
+  overlay.style.display = 'block';
+  photoInput.value = '';
+  titleInput.value = '';
+});
+
+// Cancelar
+cancelAdd.addEventListener('click', () => {
+  addForm.style.display = 'none';
+  overlay.style.display = 'none';
+});
+
+// Confirmar adição
+confirmAdd.addEventListener('click', () => {
+  const file = photoInput.files[0];
+  const title = titleInput.value.trim();
+  if(!file || !title){ alert("Escolha a foto e digite o título!"); return; }
+
+  const storageRef = storage.ref('tutorials/' + file.name);
+  storageRef.put(file).then(() => {
+    storageRef.getDownloadURL().then(url => {
+      db.collection('tutorials').add({title: title, image: url}).then(() => {
+        renderTutorials();
+        addForm.style.display = 'none';
+        overlay.style.display = 'none';
+      });
+    });
+  });
+});
+
+// Renderizar tutoriais do Firestore
+function renderTutorials(){
+  tutorialsDiv.innerHTML = '';
+  db.collection('tutorials').get().then(snapshot => {
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const div = document.createElement('div');
+      div.className = 'tutorial';
+      div.innerHTML = `<h3>${data.title}</h3><img src="${data.image}" alt="${data.title}">`;
+      tutorialsDiv.appendChild(div);
+    });
+  });
+}
+
+// Atualiza tutoriais ao abrir a página
+renderTutorials();
+</script>
+</body>
+</html>
